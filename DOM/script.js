@@ -34,6 +34,7 @@ function Customer_order(cus_name_res, order_cus_res){
     // console.log(this,"= data this")
     customer_arr.push(this)
     console.log(customer_arr," = customer array");
+    save_to_local_storage();
 }
 
 function price_order(min, max) {
@@ -42,6 +43,7 @@ function price_order(min, max) {
 // console.log(this,"= data this out function")
 
 function render_table(){
+    table_body_con.innerHTML="";
     for (let index = 0; index < customer_arr.length; index++) {
       let tr_el = document.createElement('tr');
       let td_el =document.createElement( 'td');
@@ -53,6 +55,37 @@ function render_table(){
         tr_el.appendChild(td_el);
         table_body_con.appendChild(tr_el);
 
-        
+        // name
+      let td_el_name =document.createElement( 'td');
+      td_el_name.textContent=customer_arr[index].customer_name;
+      tr_el.appendChild(td_el_name);
+
+    //   food type
+    let td_el_food_type =document.createElement( 'td');
+    td_el_food_type.textContent=customer_arr[index].order_customer;
+    tr_el.appendChild(td_el_food_type);
+
+
+    // price
+    let td_el_price =document.createElement( 'td');
+    td_el_price.textContent=customer_arr[index].price;
+    tr_el.appendChild(td_el_price);
     }
+    
+}
+read_from_local_storage();
+function save_to_local_storage(){
+    let data_save= JSON.stringify(customer_arr);
+    // console.log("data save type= ",typeof(data_save));
+    localStorage.setItem('customerOrder',data_save)
+    
+}
+
+function read_from_local_storage(){
+    let read_data=localStorage.getItem('customerOrder');
+    let converr_data_to_arr=JSON.parse(read_data);
+    console.log("data type local storage= ",typeof(converr_data_to_arr));
+    
+
+    
 }
