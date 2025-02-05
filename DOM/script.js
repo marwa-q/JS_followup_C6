@@ -85,7 +85,11 @@ function read_from_local_storage(){
     let read_data=localStorage.getItem('customerOrder');
     let converr_data_to_arr=JSON.parse(read_data);
     console.log("data type local storage= ",typeof(converr_data_to_arr));
-    
+    for (let index = 0; index < converr_data_to_arr.length; index++) {
+        new Customer_order(converr_data_to_arr[index].customer_name, converr_data_to_arr[index].order_customer)
+        render_table();
+        
+    }
 
     
 }
